@@ -1,3 +1,5 @@
+import CartWidget from "./CartWidget";
+
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,6 +50,7 @@ function NavBar() {
               Login
             </button>
           </div>
+          <CartWidget />
         </div>
       </div>
     </nav>
