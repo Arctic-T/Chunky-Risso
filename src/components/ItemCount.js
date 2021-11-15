@@ -9,7 +9,7 @@ class ItemCount extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.stock != this.props.stock) {
+    if (prevProps.stock !== this.props.stock) {
       this.setState({ count: this.props.initial });
     }
   }
