@@ -1,41 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Item from "../components/Item";
+import { resultList } from "../utills/data";
 
-class ItemDetailContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      item: null,
-    };
-  }
+export default function ItemDetailContainer() {
+  const [item, setItem] = useState(null);
+  const { id } = useParams();
 
-  componentDidMount() {
-    const itemPromise = new Promise((resolve, reject) => {
+  useEffect(() => {
+    const itemPromise = new Promise((resolve) => {
       setTimeout(() => {
-        resolve({
-          id: 1,
-          title: "Libro",
-          price: 500,
-          pictureUrl: "https://placeimg.com/640/480/any",
-        });
+        resolve(resultList.find((r) => r.id === parseInt(id)));
       }, 2000);
     });
 
     itemPromise.then((result) => {
-      this.setState({
-        item: result,
-      });
+      setItem(result);
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="d-flex justify-content-center">
-        {!this.state.item && <p>Buscando Item...</p>}
-        {this.state.item && <Item item={this.state.item} />}
-      </div>
-    );
-  }
+  return (
+    <div className="d-flex justify-content-center">
+      {!item && <p>Buscando Item...</p>}
+      {item && <Item item={item} />}
+    </div>
+  );
 }
-
-export default ItemDetailContainer;
