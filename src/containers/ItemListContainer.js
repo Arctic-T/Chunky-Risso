@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { resultList } from "../utills/data";
-import ItemCount from "../components/ItemCount";
 import ItemList from "../components/ItemList";
 
 export default function ItemListContainer({ greeting }) {
-  const [stock, setStock] = useState(5);
   const [list, setList] = useState([]);
   const { categoryId } = useParams();
 
@@ -23,12 +21,6 @@ export default function ItemListContainer({ greeting }) {
       setList(result);
     });
   }, [categoryId]);
-
-  function onAdd(items) {
-    if (stock > 0) {
-      setStock(stock - items);
-    }
-  }
 
   return (
     <div>

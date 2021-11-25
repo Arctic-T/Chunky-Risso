@@ -5,6 +5,7 @@ import { categories } from "./utills/data";
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./containers/ItemListContainer";
 import ItemDetailContainer from "./containers/ItemDetailContainer";
+import CartContainer from "./containers/CartContainer";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             element={<ItemListContainer greeting="Bienvenido a mi tienda!" />}
           />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
+          <Route path="/cart" element={<CartContainer />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Item from "../components/Item";
+import ItemDetail from "../components/ItemDetail";
 import { resultList } from "../utills/data";
 
 export default function ItemDetailContainer() {
@@ -22,7 +22,7 @@ export default function ItemDetailContainer() {
   return (
     <div className="d-flex justify-content-center">
       {!item && <p>Buscando Item...</p>}
-      {item && <Item item={item} />}
+      {item && <ItemDetail item={item} />}
     </div>
   );
 }
