@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useCartContext } from "../context/CartContext";
 import ItemCount from "./ItemCount";
 
 export default function ItemDetail({ item }) {
   const [itemCount, setItemCount] = useState(0);
+  const { addItem } = useCartContext();
 
   function onAdd(qty) {
-    alert("You have selected " + qty + " items.");
     setItemCount(qty);
+  }
+
+  function addToCart(item) {
+    addItem(item, itemCount);
   }
 
   return (
@@ -19,9 +23,14 @@ export default function ItemDetail({ item }) {
         {itemCount === 0 ? (
           <ItemCount stock={item.stock} initial={itemCount} onAdd={onAdd} />
         ) : (
-          <Link to="/cart" style={{ textDecoration: "none" }}>
+          <button
+            onClick={() => {
+              addToCart(item);
+            }}
+            style={{ textDecoration: "none" }}
+          >
             CheckOut
-          </Link>
+          </button>
         )}
       </div>
     </div>
