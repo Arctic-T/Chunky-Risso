@@ -5,16 +5,19 @@ export const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
+  const [quantityTotal, setQuantityTotal] = useState(0);
 
   function addItem(item, quantity) {
     if (!isInCart(item.id)) {
       setItems([...items, { ...item, quantity }]);
+      setQuantityTotal(quantityTotal + quantity);
     }
   }
 
-  function removeItem(id) {
-    const newItems = items.filter((i) => i.id !== id);
+  function removeItem(item) {
+    const newItems = items.filter((i) => i.id !== item.id);
     setItems(newItems);
+    setQuantityTotal(quantityTotal - item.quantity);
   }
 
   function clear() {
@@ -33,6 +36,7 @@ export function CartProvider({ children }) {
         removeItem,
         clear,
         isInCart,
+        quantityTotal,
       }}
     >
       {children}

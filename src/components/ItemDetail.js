@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
 import ItemCount from "./ItemCount";
 
@@ -8,10 +9,7 @@ export default function ItemDetail({ item }) {
 
   function onAdd(qty) {
     setItemCount(qty);
-  }
-
-  function addToCart(item) {
-    addItem(item, itemCount);
+    addItem(item, qty);
   }
 
   return (
@@ -23,14 +21,9 @@ export default function ItemDetail({ item }) {
         {itemCount === 0 ? (
           <ItemCount stock={item.stock} initial={itemCount} onAdd={onAdd} />
         ) : (
-          <button
-            onClick={() => {
-              addToCart(item);
-            }}
-            style={{ textDecoration: "none" }}
-          >
-            CheckOut
-          </button>
+          <Link to="/cart" style={{ textDecoration: "none" }}>
+            Checkout
+          </Link>
         )}
       </div>
     </div>

@@ -21,14 +21,31 @@ function ItemCount({ initial = 1, stock, onAdd }) {
 
   return (
     <div>
-      <button type="button" onClick={decreaseItem}>
+      <button
+        type="button"
+        className="btn btn-outline-success me-1"
+        onClick={decreaseItem}
+      >
         -
       </button>
-      <span>{count}</span>
-      <button type="button" onClick={increaseItem}>
+
+      <span className="me-1" style={{ color: "black", fontWeight: "bold" }}>
+        {count}
+      </span>
+
+      <button
+        type="button"
+        className="btn btn-outline-success me-1"
+        onClick={increaseItem}
+      >
         +
       </button>
-      <button type="button" onClick={() => onAdd(count)}>
+
+      <button
+        type="button"
+        className="btn btn-success me-2"
+        onClick={() => onAdd(count)}
+      >
         Agregar al Carrito
       </button>
     </div>

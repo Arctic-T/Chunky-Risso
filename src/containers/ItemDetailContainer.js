@@ -21,7 +21,7 @@ export default function ItemDetailContainer() {
 
   return (
     <div className="d-flex justify-content-center">
-      {!item && <p>Buscando Item...</p>}
+      {!item && <p>Buscando Artículos</p>}
       {item && <ItemDetail item={item} />}
     </div>
   );
