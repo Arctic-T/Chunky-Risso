@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { categories } from "./utills/data";
 import { CartProvider } from "./context/CartContext";
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./containers/ItemListContainer";
@@ -13,7 +12,7 @@ function App() {
     <CartProvider>
       <BrowserRouter>
         <div className="App">
-          <NavBar categories={categories} />
+          <NavBar />
           <Routes>
             <Route
               exact

@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../components/ItemDetail";
-import { resultList } from "../utills/data";
+import { getItemFromCollection } from "../utills/firebase";
 
 export default function ItemDetailContainer() {
   const [item, setItem] = useState(null);
   const { id } = useParams();
 
-  useEffect(() => {
-    const itemPromise = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(resultList.find((r) => r.id === parseInt(id)));
-      }, 2000);
-    });
+  async function getItem() {
+    const itemFromCollection = await getItemFromCollection(id);
+    setItem(itemFromCollection);
+  }
 
-    itemPromise.then((result) => {
-      setItem(result);
-    });
+  useEffect(() => {
+    getItem();
   }, []);
 
   return (

@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { resultList } from "../utills/data";
 import ItemList from "../components/ItemList";
+import { getItemsCollection } from "../utills/firebase";
 
 export default function ItemListContainer({ greeting }) {
   const [list, setList] = useState([]);
   const { categoryId } = useParams();
 
-  useEffect(() => {
-    const itemListPromise = new Promise((resolve) => {
-      setTimeout(() => {
-        const listFiltered = resultList.filter(
-          (r) => r.category.id === parseInt(categoryId)
-        );
-        resolve(listFiltered.length > 0 ? listFiltered : resultList);
-      }, 2000);
-    });
+  async function getItemList() {
+    const itemCollection = await getItemsCollection(categoryId);
+    setList(itemCollection);
+  }
 
-    itemListPromise.then((result) => {
-      setList(result);
-    });
+  useEffect(() => {
+    getItemList();
   }, [categoryId]);
 
   return (

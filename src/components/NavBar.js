@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { getCategoriesCollection } from "../utills/firebase";
 import CartWidget from "./CartWidget";
 
-function NavBar({ categories }) {
+function NavBar() {
+  const [categories, setCategories] = useState([]);
+
+  async function getCategories() {
+    const categoriesList = await getCategoriesCollection();
+    setCategories(categoriesList);
+  }
+
+  useEffect(() => {
+    getCategories();
+  });
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -30,7 +43,7 @@ function NavBar({ categories }) {
               return (
                 <li className="nav-item" key={c.id}>
                   <NavLink className="nav-link" to={`/category/${c.id}`}>
-                    {c.label}
+                    {c.name}
                   </NavLink>
                 </li>
               );
